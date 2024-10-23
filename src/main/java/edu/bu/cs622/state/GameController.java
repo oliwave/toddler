@@ -1,7 +1,10 @@
 package edu.bu.cs622.state;
 
+import java.util.List;
+
 import edu.bu.cs622.mode.Mode;
 import edu.bu.cs622.path.Path;
+import edu.bu.cs622.path.Step;
 
 /*
  * TODO: Delegation pattern
@@ -18,10 +21,13 @@ public class GameController implements Mode {
 
   @Override
   public boolean validatePath(Path gamePath, Path userPath) {
-    if (gamePath == null || userPath == null) {
-      System.out.println("game or user path is null");
+    List<Step> gameSteps = gamePath.getSteps();
+    List<Step> userSteps = userPath.getSteps();
+
+    if (gameSteps.size() != userSteps.size()) {
       return false;
     }
+    
     return mode.validatePath(gamePath, userPath);
   }
 

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import edu.bu.cs622.mode.DifficultMode;
 import edu.bu.cs622.mode.EasyMode;
+import edu.bu.cs622.mode.Mode;
 import edu.bu.cs622.state.Game;
 import edu.bu.cs622.state.GameController;
 import edu.bu.cs622.state.Player;
@@ -15,7 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 
 public class Submit implements Publisher {
-  private Button submitButton = new Button("submit");
+  private Button submitEasyButton = new Button("Easy");
+  private Button submitHardButton = new Button("Hard");
   private List<Subscriber> subscribers = new ArrayList<>();
   private GameController gc;
   private Player player = Player.getPlaryer(this);
@@ -31,15 +34,20 @@ public class Submit implements Publisher {
   }
 
   private Submit() {
-    submitButton.setOnAction(e -> submit());
+    submitEasyButton.setOnAction(e -> submit(new EasyMode()));
+    submitHardButton.setOnAction(e -> submit(new DifficultMode()));
   }
 
-  public Button getSubmitButton() {
-    return submitButton;
+  public Button getSubmitHardButton() {
+    return submitHardButton;
   }
 
-  private void submit() {
-    checkMode();
+  public Button getSubmitEasyButton() {
+    return submitEasyButton;
+  }
+
+  private void submit(Mode m) {
+    gc = new GameController(m);
 
     if (gc.validatePath(game.getPath(), player.getPath())) {
       showAlert("Success", "Congratulations! You've followed the correct path and won the game.", true);
@@ -48,10 +56,6 @@ public class Submit implements Publisher {
     }
 
     notifySubscribers();
-  }
-
-  private void checkMode() {
-    gc = new GameController(new EasyMode());
   }
 
   // Show an alert box for game feedback and restart option

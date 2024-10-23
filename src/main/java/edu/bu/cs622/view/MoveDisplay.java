@@ -1,6 +1,5 @@
 package edu.bu.cs622.view;
 
-import edu.bu.cs622.path.Direction;
 import edu.bu.cs622.utils.observer.Publisher;
 import edu.bu.cs622.utils.observer.Subscriber;
 import javafx.geometry.Insets;
@@ -28,10 +27,18 @@ public class MoveDisplay implements Subscriber {
     refresh();
   }
 
-  private void addLabel(String direction) {
+  private void addDirectionLabel(String direction) {
     Label moveLabel = new Label(direction);
     moveLabel.setStyle("-fx-border-color: red; -fx-padding: 5px;");
     box.getChildren().add(moveLabel);
+  }
+
+  private void addColorLabel(String color) {
+    Label colorLabel = new Label();
+    colorLabel
+        .setStyle("-fx-pref-width: 30px; -fx-pref-height: 10px; -fx-border-color: red; -fx-background-color: " + color
+            + "; -fx-padding: 5px;");
+    box.getChildren().add(colorLabel);
   }
 
   public void refresh() {
@@ -49,8 +56,11 @@ public class MoveDisplay implements Subscriber {
   @Override
   public void update(Publisher publisher) {
     if (publisher instanceof DirectionButtons) {
-      Direction direction = this.buttons.getCurDirection();
-      addLabel(direction.getDirection());
+      if (buttons.isColor()) {
+        addColorLabel(this.buttons.getCurColor().getColor());
+      } else {
+        addDirectionLabel(this.buttons.getCurDirection().getDirection());
+      }
     } else if (publisher instanceof Submit) {
       refresh();
     }

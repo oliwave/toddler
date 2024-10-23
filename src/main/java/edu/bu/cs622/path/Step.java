@@ -3,9 +3,9 @@ package edu.bu.cs622.path;
 public class Step {
   private Location location;
   private Direction direction;
-  private String color = null;
+  private Color color = Color.WHITE;
 
-  public Step(Location location, Direction direction, String color) {
+  public Step(Location location, Direction direction, Color color) {
     this.location = location;
     this.direction = direction;
     this.color = color;
@@ -25,10 +25,10 @@ public class Step {
   }
 
   public String getColor() {
-    return color;
+    return color.getColor();
   }
 
-  public void setColor(String color) {
+  public void setColor(Color color) {
     this.color = color;
   }
 

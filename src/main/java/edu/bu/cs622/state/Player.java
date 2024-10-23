@@ -1,5 +1,8 @@
 package edu.bu.cs622.state;
 
+import java.util.List;
+
+import edu.bu.cs622.path.Color;
 import edu.bu.cs622.path.Direction;
 import edu.bu.cs622.path.Location;
 import edu.bu.cs622.path.Path;
@@ -32,7 +35,7 @@ public class Player implements Subscriber {
     this.submit.subscribe(this);
     refresh();
   }
-  
+
   private void refresh() {
     this.x = 0;
     this.y = 0;
@@ -46,28 +49,40 @@ public class Player implements Subscriber {
     switch (d) {
       case UP:
         y--;
-        addStep(d, "white", x, y);
+        addStep(d, x, y);
         break;
       case DOWN:
         y++;
-        addStep(d, "white", x, y);
+        addStep(d, x, y);
         break;
       case LEFT:
         x--;
-        addStep(d, "white", x, y);
+        addStep(d, x, y);
         break;
       case RIGHT:
         x++;
-        addStep(d, "white", x, y);
+        addStep(d, x, y);
         break;
     }
 
-    System.out.println("Steps: " + path.getSteps().size() + " x: " + x + " y: " + y);
+    // System.out.println("Steps: " + path.getSteps().size() + " x: " + x + " y: " + y);
   }
 
-  private void addStep(Direction d, String color, int x, int y) {
+  private void setStepColor() {
+    List<Step> steps = path.getSteps();
+    // Only set the color to the step if steps are not empty
+    if (!steps.isEmpty()) {
+      Step lastStep = steps.get(steps.size() - 1);
+      // Only set the color to the step if the last step is WHITE (default)
+      if (lastStep.getColor().equals(Color.WHITE.getColor())) {
+        lastStep.setColor(buttons.getCurColor());
+      }
+    }
+  }
+
+  private void addStep(Direction d, int x, int y) {
     Location loc = new Location(x, y);
-    path.addStep(new Step(loc, d, color));
+    path.addStep(new Step(loc, d));
   }
 
   public Path getPath() {
@@ -77,7 +92,11 @@ public class Player implements Subscriber {
   @Override
   public void update(Publisher publisher) {
     if (publisher instanceof DirectionButtons) {
-      addStepToPath();
+      if (buttons.isColor()) {
+        setStepColor();
+      } else {
+        addStepToPath();
+      }
     } else if (publisher instanceof Submit) {
       refresh();
     }

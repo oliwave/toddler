@@ -35,17 +35,24 @@ public class GameGrid implements Subscriber {
     for (int i = 0; i < GRID_SIZE; i++) {
       for (int j = 0; j < GRID_SIZE; j++) {
         Cell grid = game.getGridValue(i, j);
-        Label cell = new Label(" " + grid.getName() + " ");
-        cell.setStyle("-fx-border-color: black; -fx-alignment: center; -fx-background-color: " + grid.getColor());
-        gridPane.add(cell, j, i);
+        Label cell = populateLabel(grid.getName(), grid.getColor());
+        gridPane.add(cell, i, j);
       }
     }
+  }
+
+  private Label populateLabel(String text, String color) {
+    Label cell = new Label(" " + text + " ");
+    cell.setStyle(
+        "-fx-pref-width: 100px; -fx-pref-height: 100px; -fx-border-color: black; -fx-alignment: center; -fx-background-color: "
+            + color);
+    return cell;
   }
 
   public GridPane getGridPane() {
     return gridPane;
   }
-  
+
   @Override
   public void update(Publisher publisher) {
     refresh();

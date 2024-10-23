@@ -4,12 +4,13 @@ public class Cell {
   private String name = "";
   private String color = "black";
 
-  public Cell() {
+  public Cell(String color) {
+    setColor(color);
   }
 
   public Cell(String name, String color) {
-    this.name = name;
-    this.color = color;
+    setName(name);
+    setColor(color);
   }
 
   public String getName() {
