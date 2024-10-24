@@ -69,7 +69,7 @@ public class Submit implements Publisher {
   }
 
   /**
-   * Submit the results and see if userr win the game.
+   * Submit the results and see if the user win the game.
    * 
    * @param m Easy mode or hard mode
    */
