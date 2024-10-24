@@ -22,14 +22,6 @@ public class Toddler extends Application {
   private Submit submit = Submit.getSubmit();
   private Start start = Start.getStart();
 
-  /**
-   * A main method to run examples.
-   * You may use this method for development purposes as you start building your
-   * assignments/final project. This could prove convenient to test as you are
-   * developing.
-   * However, please note that every assignment/final projects requires JUnit
-   * tests.
-   */
   public static void main(String[] args) {
     launch(args);
   }
