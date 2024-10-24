@@ -23,18 +23,6 @@ public class EasyMode implements Mode {
     List<Step> gameSteps = gamePath.getSteps();
     List<Step> userSteps = userPath.getSteps();
 
-    // for (Step step : gameSteps) {
-    // System.out.println("gamePath -> Color: " + step.getColor() + " Direction: " +
-    // step.getDirection() + " Location: "
-    // + step.getLocation().getX() + "," + step.getLocation().getY());
-    // }
-
-    // for (Step step : userSteps) {
-    // System.out.println("userPath -> Color: " + step.getColor() + " Direction: " +
-    // step.getDirection() + " Location: "
-    // + step.getLocation().getX() + "," + step.getLocation().getY());
-    // }
-
     for (int i = 0; i < gameSteps.size(); i++) {
       if (!gameSteps.get(i).getDirection().equals(userSteps.get(i).getDirection())) {
         return false;

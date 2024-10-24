@@ -85,9 +85,6 @@ public class Player implements Subscriber {
       default:
         break;
     }
-
-    // System.out.println("Steps: " + path.getSteps().size() + " x: " + x + " y: " +
-    // y);
   }
 
   /**
