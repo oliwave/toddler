@@ -26,6 +26,7 @@ public class Submit implements Publisher {
   private GameController gc;
   private Player player = Player.getPlaryer(this);
   private Game game = Game.getGame(this);
+  private DirectionButtons directionButtons = DirectionButtons.getDirectionButtons();
   private static Submit submit;
 
   /**
@@ -83,6 +84,8 @@ public class Submit implements Publisher {
     } else {
       showAlert("Failure", failureMsg, true);
     }
+
+    directionButtons.getButtons().setVisible(false);
 
     notifySubscribers();
   }

@@ -3,6 +3,7 @@ package edu.bu.cs622;
 import edu.bu.cs622.view.DirectionButtons;
 import edu.bu.cs622.view.GameGrid;
 import edu.bu.cs622.view.MoveDisplay;
+import edu.bu.cs622.view.Start;
 import edu.bu.cs622.view.Submit;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -19,6 +20,7 @@ public class Toddler extends Application {
   private DirectionButtons directionButtons = DirectionButtons.getDirectionButtons();
   private MoveDisplay moveDisplay = MoveDisplay.getMoveDisplay();
   private Submit submit = Submit.getSubmit();
+  private Start start = Start.getStart();
 
   /**
    * A main method to run examples.
@@ -49,6 +51,7 @@ public class Toddler extends Application {
         gridContainer,
         directionButtons.getButtons(),
         moveDisplay.getDisplayBox(),
+        start.getStartButton(),
         submit.getSubmitEasyButton(),
         submit.getSubmitHardButton());
     vbox.setPadding(new Insets(10));

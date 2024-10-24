@@ -78,6 +78,7 @@ public class DirectionButtons implements Publisher {
         blueButton,
         yellowButton);
     buttons.setAlignment(Pos.CENTER);
+    buttons.setVisible(false);
   }
 
   /**
