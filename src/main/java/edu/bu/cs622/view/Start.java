@@ -41,9 +41,7 @@ public class Start {
   }
 
   /**
-   * start the results and see if userr win the game.
-   * 
-   * @param m Easy mode or hard mode
+   * Start the game
    */
   private void start() {
     directionButtons.getButtons().setVisible(true);
